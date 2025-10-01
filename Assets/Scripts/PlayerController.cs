@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     public Text textoContador;
 
+    public Text textoGanar;
+
     private int contador;
 
     private ParticleSystem sistemaParticulas;
@@ -40,6 +42,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();   
 
         textoContador.text = "Contador: " + contador.ToString();
+
+        textoGanar.text = "";
     }
 
     void Update()
@@ -49,6 +53,10 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if(contador >= 11){
+            textoGanar.text = "¡¡Has Ganado!!";
+        }
+
         if (other.gameObject.CompareTag("Recolectable")){
             other.gameObject.SetActive(false);
             contador = contador + 1;
